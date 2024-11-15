@@ -14,6 +14,7 @@ pscad_model, csv_editor.py, out2csv.py, run_simulation.py
 - create snapshot file  
     1. Launch the PSCAD file (ieee_39_bus_system in the pscad_model folder)
     2. Set the project setting,
+    --
     ![image](https://github.com/user-attachments/assets/5c0dae6a-a29c-4204-ab78-34b2faad77d5)
 
     4. Run simulation and get snapshot file.
@@ -21,12 +22,13 @@ pscad_model, csv_editor.py, out2csv.py, run_simulation.py
     
 - run the simulation
     1. Change project setting,
+    --
     ![image](https://github.com/user-attachments/assets/e153d8ec-3b3d-45d8-bd04-675c8c23bea5)
 
 
 
-    2. Save and close the window.
-    3. Run python file.
+    3. Save and close the window.
+    4. Run python file.
     ```bash
     python run_simulation.py
     ```
