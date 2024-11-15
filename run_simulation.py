@@ -7,7 +7,7 @@ import math
 import mhi.pscad.handler
 import random
 import time
-import csv_editor
+from csv_editor import combine_csv, noise_csv
 
 # ETA = NUM_EP*NUM_TYPE*num_location*simul_time
 
@@ -39,7 +39,7 @@ class DATA_GENERATOR():
                               651641648,39790737,370916838,138760033,1411499999,
                               1761070132,2006928665,1393573637,188082429]
 
-        self.num_location = len(self.fault_sliders)
+        self.num_location = 1 # len(self.fault_sliders)
         self.prev_location = -1
         self.prev_time = time.time()
 
@@ -113,7 +113,7 @@ class DATA_GENERATOR():
             self.current_time = time.time()
             # print('simulation_time: ',self.current_time-self.prev_time)
             eta = (self.NUM_TYPE*self.num_location*self.NUM_EP)*(self.current_time-self.prev_time) - (fault_type*self.NUM_EP + i)*(self.current_time-self.prev_time)
-            rate = ((fault_type*self.NUM_EP + i) * 100) / (self.NUM_TYPE*self.num_location*self.NUM_EP)
+            rate = ((fault_type*self.NUM_EP + i + 1) * 100) / (self.NUM_TYPE*self.num_location*self.NUM_EP)
             print("ETA: ",str(math.floor(eta/3600))+":"+str(math.floor((eta%3600)/60)).rjust(2,'0')+":"+str(math.floor(eta%60)).rjust(2, '0'),"  -  ",str(round(rate,2))+"%")
             self.prev_time = time.time()
 
@@ -129,11 +129,11 @@ class DATA_GENERATOR():
                 else:
                     pass
 
-        csv_editor.combine_csv("train_dataset")
-        csv_editor.combine_csv("test_dataset")
+        combine_csv("train_dataset")
+        combine_csv("test_dataset")
 
-        csv_editor.noise_csv("train_dataset")
-        csv_editor.noise_csv("test_dataset")
+        noise_csv("train_dataset")
+        noise_csv("test_dataset")
 
 if __name__ == '__main__':
     data_generator = DATA_GENERATOR()
