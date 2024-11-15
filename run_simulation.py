@@ -39,7 +39,7 @@ class DATA_GENERATOR():
                               651641648,39790737,370916838,138760033,1411499999,
                               1761070132,2006928665,1393573637,188082429]
 
-        self.num_location = 1 # len(self.fault_sliders)
+        self.num_location = len(self.fault_sliders)
         self.prev_location = -1
         self.prev_time = time.time()
 
