@@ -58,7 +58,7 @@ class DATA_GENERATOR():
         self.project_1 = 'ieee_39_bus'
 
         # Launch specific PSCAD and Fortran version
-        self.pscad = mhi.pscad.launch(version='5.0.1', settings=self.settings)
+        self.pscad = mhi.pscad.launch(version='4.6.3', settings=self.settings)
         with mhi.pscad.application() as self.pscad:
             self.pscad.load(self.pswx_path)
             self.project = self.pscad.project(self.project_1)
