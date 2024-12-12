@@ -23,12 +23,12 @@ class DATA_GENERATOR():
         self.NUM_TYPE               = 4
 
         # Fault_location
-        self.canvases      = ["T26_29","T26_28","T25_26","T28_29","T26_27"
-                              "T2_25","T17_27","T17_18","T1_2","T2_3"
-                              "T3_18","T16_17","T16_24","T1_39","T16_21"
-                              "T15_16","T3_4","T23_24","T21_22","T4_14"
-                              "T14_15","T4_5","T16_19","T22_23","T5_6"
-                              "T13_14","T5_8","T6_7","T9_39","T6_11"
+        self.canvases      = ["T26_29","T26_28","T25_26","T28_29","T26_27",
+                              "T2_25","T17_27","T17_18","T1_2","T2_3",
+                              "T3_18","T16_17","T16_24","T1_39","T16_21",
+                              "T15_16","T3_4","T23_24","T21_22","T4_14",
+                              "T14_15","T4_5","T16_19","T22_23","T5_6",
+                              "T13_14","T5_8","T6_7","T9_39","T6_11",
                               "T7_8","T10_11","T10_13","T8_9"]
 
         self.fault_sliders = [2093508710,1683108412,655794188,465722641,344768387,
@@ -66,23 +66,23 @@ class DATA_GENERATOR():
         self.project_1 = 'ieee_39_bus'
 
         # Launch specific PSCAD and Fortran version
-        self.pscad = mhrc.automation.launch_pscad(version='4.6.3', fortran_version=GFortran)
-
+        self.pscad = mhrc.automation.launch_pscad()
 
     # project.component #
-    # component.parameters #
+    # component.set_parameters #
     def reset_components(self):
         if self.prev_location == -1:
             for i in range(len(self.fault_sliders)):
                 # slider
                 canvas = self.project.user_canvas(self.canvases[i])
                 self.fault_slider = canvas.user_cmp(self.fault_sliders[i])
-                self.fault_slider.set_value(Value=0)
+                self.fault_slider.set_parameters(0)
+                # self.fault_slider.set_value(Value=0)
                 print("Step_1")
         else: 
             canvas = self.project.user_canvas(self.canvases[self.prev_location])
             self.fault_slider = canvas.user_cmp(self.fault_sliders[self.prev_location])
-            self.fault_slider.set_value(Value=0)
+            self.fault_slider.set_parameters(0)
         
     # project.component #
     # component.value, component.parameters #
@@ -100,11 +100,12 @@ class DATA_GENERATOR():
         print("Step_2")
         self.fault_slider = canvas.user_cmp(self.fault_sliders[fault_location])
         print("Step_3")
-        self.fault_slider.set_value(fault_type)
+        self.fault_slider.set_parameters(fault_type)
         print("Step_4")
         self.fault_timer = canvas.user_cmp(self.fault_timers[fault_location])
         print("Step_5")
-        self.fault_timer.parameters(TF=str(event_start), DF=str(event_duration))
+        self.fault_timer.set_parameters(TF=str(event_start), DF=str(event_duration))
+        # self.fault_timer.parameters(TF=str(event_start), DF=str(event_duration))
         print("Step_6")
 
         self.prev_location = fault_location
